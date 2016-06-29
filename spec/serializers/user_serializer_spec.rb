@@ -5,7 +5,8 @@ RSpec.describe UserSerializer, type: :serializer do
   context 'Individual Resource Represantation' do
     let(:resource) { create(:user) }
     let(:serialization) { "#{resource.class}Serializer".constantize.new(resource) }
-    let(:serialized_resource) { JSON.parse(serialization.to_json)[resource.class.to_s.downcase] }
+    #let(:serialized_resource) { JSON.parse(serialization.to_json)[resource.class.to_s.downcase] }
+    let(:serialized_resource) { JSON.parse(serialization.to_json) }
 
     context "with valid attributes" do
       it 'serializes the resource attributes' do
@@ -25,7 +26,7 @@ RSpec.describe UserSerializer, type: :serializer do
 
     context "with invalid attribute" do
       it 'returns nil' do
-        expect(resource['foo']).to be_nil
+        expect(serialized_resource['foo']).to eq nil
       end
     end
   end
