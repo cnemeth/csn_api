@@ -4,12 +4,14 @@ module Api
 
       # GET /api/v1/users
       def index
-        render json: User.all
+        @users = User.all
+        render json: @users
       end
 
       # GET /api/v1/users/:id
       def show
-        render json: User.find(params[:id])
+        @user = User.find(params[:id])
+        render json: @user
       end
     end
   end
